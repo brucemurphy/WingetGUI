@@ -41,8 +41,6 @@ Public Class Form1
         myProcess.Start()
         myProcess.WaitForExit()
 
-        System.Threading.Thread.Sleep(2000)
-
         'Tidy up output seek for █ and ▒
         Dim FindLines() As String
         Dim outputlines As New List(Of String)
@@ -114,7 +112,7 @@ Public Class Form1
         LB_SelectedName.Items.Add(vName)
         LB_SelectedID.Items.Add(vPayload)
     End Sub
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BU_Build.Click
         If TB_Filename.Text = "" Then
             MsgBox("No Filename")
             Exit Sub
@@ -178,34 +176,33 @@ Public Class Form1
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Cleanup()
+        'If My.Computer.Network.Ping("www.bing.com") = "True" Then
+        '    Dim wc As New WebClient
+        '    Dim xmlText As String = wc.DownloadString("https://www.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=1&mkt=en-US")
+        '    System.IO.File.WriteAllText("Wallpaper.xml", xmlText)
 
-        If My.Computer.Network.Ping("www.bing.com") = "True" Then
-            Dim wc As New WebClient
-            Dim xmlText As String = wc.DownloadString("https://www.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=1&mkt=en-US")
-            System.IO.File.WriteAllText("Wallpaper.xml", xmlText)
+        '    Dim edtConfig = XDocument.Load("Wallpaper.xml")
 
-            Dim edtConfig = XDocument.Load("Wallpaper.xml")
+        '    Dim vWallpaper As String = <url><%= From ReadEDT In edtConfig.<images>.<image> Select ReadEDT.<url>.Value %></url>
+        '    Dim FullURL As String = "https://www.bing.com" & vWallpaper
+        '    DownloadFile(FullURL, "Wallpaper.jpeg")
 
-            Dim vWallpaper As String = <url><%= From ReadEDT In edtConfig.<images>.<image> Select ReadEDT.<url>.Value %></url>
-            Dim FullURL As String = "https://www.bing.com" & vWallpaper
-            DownloadFile(FullURL, "Wallpaper.jpeg")
+        '    Dim id As String = "Wallpaper"
+        '    Dim folder As String = ""
+        '    Dim filename As String = System.IO.Path.Combine(folder, id & ".jpeg")
+        '    Try
+        '        Using fs As New System.IO.FileStream(filename, IO.FileMode.Open)
+        '            PictureBox1.Image = New Bitmap(Image.FromStream(fs))
+        '            PictureBox1.BackgroundImageLayout = PictureBoxSizeMode.Zoom
 
-            Dim id As String = "Wallpaper"
-            Dim folder As String = ""
-            Dim filename As String = System.IO.Path.Combine(folder, id & ".jpeg")
-            Try
-                Using fs As New System.IO.FileStream(filename, IO.FileMode.Open)
-
-                    PictureBox1.Image = New Bitmap(Image.FromStream(fs))
-                    PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
-                End Using
-            Catch ex As Exception
-                Dim msg As String = "Filename: " & filename &
-                Environment.NewLine & Environment.NewLine &
-                "Exception: " & ex.ToString
-                MessageBox.Show(msg, "Error Opening Image File")
-            End Try
-        End If
+        '        End Using
+        '    Catch ex As Exception
+        '        Dim msg As String = "Filename: " & filename &
+        '        Environment.NewLine & Environment.NewLine &
+        '        "Exception: " & ex.ToString
+        '        MessageBox.Show(msg, "Error Opening Image File")
+        '    End Try
+        'End If
 
     End Sub
     Sub Cleanup()
@@ -222,8 +219,7 @@ Public Class Form1
             My.Computer.FileSystem.DeleteFile("Wallpaper.jpeg")
         End If
     End Sub
-
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs)
+    Private Sub BU_Remove_Click(sender As Object, e As EventArgs) Handles BU_Remove.Click
         Dim listIndex As Integer = LB_SelectedName.SelectedIndex
 
 
@@ -247,7 +243,6 @@ Public Class Form1
             BU_Remove.Visible = False
         End If
     End Sub
-
     Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
         LB_Search_Out.Items.Clear()
         LB_SelectedName.Items.Clear()
@@ -280,7 +275,6 @@ Public Class Form1
         LB_Manifest.Visible = True
         CB_lnk.Visible = True
     End Sub
-
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
         LB_Manifest.Visible = False
         BU_Remove.Visible = False
@@ -296,35 +290,24 @@ Public Class Form1
     Public Function DownloadFile(URL As String, LocalFilename As String) As Boolean
         DownloadFile = (URLDownloadToFile(0, URL, LocalFilename, 0, 0) = 0)
     End Function
-
-    Private Sub ScaleImage(ByVal p As PictureBox, ByRef i As Bitmap)
-        If i.Height > p.Height Then
-            Dim diff As Integer = i.Height - p.Height
-            Dim Resized As Bitmap = New Bitmap(i, New Size(i.Width - diff, i.Height - diff))
-            i = Resized
-        End If
-        If i.Width > p.Width Then
-            Dim diff As Integer = i.Width - p.Width
-            Dim Resized As Bitmap = New Bitmap(i, New Size(i.Width - diff, i.Height - diff))
-            i = Resized
-        End If
-
-    End Sub
-
     Private Sub TB_Search_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TB_Search.KeyPress
         If e.KeyChar = Chr(13) Then 'Chr(13) is the Enter Key
             BU_Search_Click(Me, EventArgs.Empty)
+            e.Handled = True
         End If
         If e.KeyChar = Chr(27) Then
             TB_Search.Text = ""
             LB_Search_Out.Items.Clear()
             LB_Search_Out.Visible = False
+            BU_Add.Visible = False
+            e.Handled = True
+        End If
+    End Sub
+    Private Sub TB_Filename_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles TB_Filename.KeyPress
+        If e.KeyChar = Chr(13) Then 'Chr(13) is the Enter Key
+            Button1_Click(Me, EventArgs.Empty)
+            e.Handled = True
 
         End If
-
     End Sub
-
-
-
-
 End Class
