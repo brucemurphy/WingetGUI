@@ -1,0 +1,18 @@
+C:\Users\brucemu\source\repos\Winget GUI\bin\Release\net6.0-windows\Winget GUI.exe
+C:\Users\brucemu\source\repos\Winget GUI\bin\Release\net6.0-windows\Winget GUI.deps.json
+C:\Users\brucemu\source\repos\Winget GUI\bin\Release\net6.0-windows\Winget GUI.runtimeconfig.json
+C:\Users\brucemu\source\repos\Winget GUI\bin\Release\net6.0-windows\Winget GUI.dll
+C:\Users\brucemu\source\repos\Winget GUI\bin\Release\net6.0-windows\Winget GUI.pdb
+C:\Users\brucemu\source\repos\Winget GUI\obj\Release\net6.0-windows\Winget GUI.vbproj.AssemblyReference.cache
+C:\Users\brucemu\source\repos\Winget GUI\obj\Release\net6.0-windows\Winget_GUI.Resources.resources
+C:\Users\brucemu\source\repos\Winget GUI\obj\Release\net6.0-windows\Winget_GUI.Form1.resources
+C:\Users\brucemu\source\repos\Winget GUI\obj\Release\net6.0-windows\Winget GUI.vbproj.GenerateResource.cache
+C:\Users\brucemu\source\repos\Winget GUI\obj\Release\net6.0-windows\Winget GUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\brucemu\source\repos\Winget GUI\obj\Release\net6.0-windows\Winget GUI.AssemblyInfoInputs.cache
+C:\Users\brucemu\source\repos\Winget GUI\obj\Release\net6.0-windows\Winget GUI.AssemblyInfo.vb
+C:\Users\brucemu\source\repos\Winget GUI\obj\Release\net6.0-windows\Winget GUI.vbproj.CoreCompileInputs.cache
+C:\Users\brucemu\source\repos\Winget GUI\obj\Release\net6.0-windows\Winget GUI.dll
+C:\Users\brucemu\source\repos\Winget GUI\obj\Release\net6.0-windows\refint\Winget GUI.dll
+C:\Users\brucemu\source\repos\Winget GUI\obj\Release\net6.0-windows\Winget GUI.pdb
+C:\Users\brucemu\source\repos\Winget GUI\obj\Release\net6.0-windows\Winget GUI.genruntimeconfig.cache
+C:\Users\brucemu\source\repos\Winget GUI\obj\Release\net6.0-windows\ref\Winget GUI.dll
